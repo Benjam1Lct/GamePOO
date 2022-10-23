@@ -31,7 +31,7 @@ class OeufChocolat(pygame.sprite.Sprite):
         self.rect.y += self.vitesse_chute
 
         # si il touche le panier
-        if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 360:
+        if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 550:
             print("Collision", self.rect.y)
             self.repositionner()
             # ajouter des points

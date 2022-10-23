@@ -4,8 +4,8 @@ import pygame # utiliser le module pygame pour faire des jeux avec python
 pygame.init() # charger les composants
 
 # definir les dimentions
-largeur = 800
-hauteur = 480
+largeur = 1200
+hauteur = 720
 
 # creer la fenetre avec pygame
 fenetre = pygame.display.set_mode((largeur, hauteur)) # on definit la taille
@@ -31,7 +31,7 @@ touches_active = {}
 panier = Panier(largeur, hauteur)
 
 # créer la couleur
-chocolat_couleur = (87, 64, 53)
+chocolat_couleur = (120, 224, 135)
 
 # créer un groupe qui va contenir plusieurs oeufs en chocolat
 oeufs = pygame.sprite.Group()
@@ -50,11 +50,11 @@ while running:
     largeur_chocolat = (panier.points*780)/panier.maximum_points
 
     # dessiner l'arriere de la jauge
-    pygame.draw.rect(fenetre, (128, 128, 128), [10, hauteur - 50, largeur - 20, 32] )
-    pygame.draw.rect(fenetre, chocolat_couleur, [10, hauteur - 50, largeur_chocolat, 32] )
+    pygame.draw.rect(fenetre, (10, 15, 10), [10, hauteur - 45, largeur - 20, 32] )
+    pygame.draw.rect(fenetre, chocolat_couleur, [10, hauteur - 45, largeur_chocolat, 32] )
 
     # on place la bar de chocolat
-    fenetre.blit(bar_chocolat, (largeur_chocolat - bar_chocolat.get_width() / 2.9, 420))
+    fenetre.blit(bar_chocolat, (largeur_chocolat - bar_chocolat.get_width() / 2.9, 660))
 
     # recupere tout les oeufs depuis mon groupe de sprite
     for oeuf in oeufs:
