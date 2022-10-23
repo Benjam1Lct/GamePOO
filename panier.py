@@ -8,7 +8,7 @@ class Panier(pygame.sprite.Sprite):
     def __init__(self, largeur_ecran, hauteur_ecran):
         super().__init__()
         self.largeur_ecran = largeur_ecran
-        self.points = 0 # nombre de points qu'aura le joueur
+        self.points = 10 # nombre de points qu'aura le joueur
         self.maximum_points = 100 # nombre maximum de points
         self.image = pygame.image.load('assets/panier.png') # charger l'image du panier
         self.image = pygame.transform.scale(self.image, (120, 120)) # redimentionner l'image
@@ -19,16 +19,20 @@ class Panier(pygame.sprite.Sprite):
 
     # methode pour ajouter 5 points
     def ajouter_points(self):
-        if self.points + 5 <= self.maximum_points: # limite de points
+        if self.points < self.maximum_points: # limite de points
             print("+5 points")
             self.points += 5
             print(self.points)
+        if self.points > self.maximum_points:
+            #gagne
+            print('Gagner')
 
     # methode enlever 2 points
     def enlever_points(self):
-        if self.points - 2 > 0: 
-            print("-2 points")
-            self.points -= 2
+        if self.points > 0: 
+            print("-5 points")
+            self.points -= 5
+            print(self.points)
         else:
             # perdu
             print("Perdu")

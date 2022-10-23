@@ -46,15 +46,15 @@ while running:
     oeufs.draw(fenetre)
     fenetre.blit(panier.image, panier.rect)
     fenetre.blit(sol, (0, 0))
-
-    largeur_chocolat = panier.points * 3 - 20
+    
+    largeur_chocolat = (panier.points*780)/panier.maximum_points
 
     # dessiner l'arriere de la jauge
     pygame.draw.rect(fenetre, (128, 128, 128), [10, hauteur - 50, largeur - 20, 32] )
     pygame.draw.rect(fenetre, chocolat_couleur, [10, hauteur - 50, largeur_chocolat, 32] )
 
     # on place la bar de chocolat
-    fenetre.blit(bar_chocolat, (largeur_chocolat - bar_chocolat.get_width() / 2, 420))
+    fenetre.blit(bar_chocolat, (largeur_chocolat - bar_chocolat.get_width() / 2.9, 420))
 
     # recupere tout les oeufs depuis mon groupe de sprite
     for oeuf in oeufs:
