@@ -1,11 +1,16 @@
 from panier import Panier # on importe le composant panier
 from oeuf import OeufChocolat # on import la classe oeuf chocolat
-import pygame # utiliser le module pygame pour faire des jeux avec python
+import pygame
+
+from panierSecond import PanierSecond # utiliser le module pygame pour faire des jeux avec python
 pygame.init() # charger les composants
 
 # definir les dimentions
 largeur = 1200
 hauteur = 720
+
+#def des fps
+clock = pygame.time.Clock()
 
 # creer la fenetre avec pygame
 fenetre = pygame.display.set_mode((largeur, hauteur)) # on definit la taille
@@ -20,19 +25,22 @@ sol = pygame.image.load('assets/sol.png') # charger l'image du sol
 solRound = pygame.image.load('assets/solRound.png') # charger l'image du sol
 
 # charger la barre de chocolat
-bar_chocolat = pygame.image.load('assets/chocolate.png') 
+bar_chocolat = pygame.image.load('assets/chocolate.png')
+bar_chocolat_start = pygame.image.load('assets/chocolateStart.png')
 
 # redimentionner
 bar_chocolat = pygame.transform.scale(bar_chocolat, (50, 50))
+bar_chocolat_start = pygame.transform.scale(bar_chocolat_start, (50, 50))
 
 # créer un dictionnaire qui va contenir en temps reel les touches enclenchées par le joueur
 touches_active = {}
 
 # créer le panier du joueur
 panier = Panier(largeur, hauteur)
+panierSecond = PanierSecond(largeur, hauteur)
 
 # créer la couleur
-chocolat_couleur = (120, 224, 135)
+chocolat_couleur = (146, 122, 86)
 
 # créer un groupe qui va contenir plusieurs oeufs en chocolat
 oeufs = pygame.sprite.Group()
@@ -44,6 +52,7 @@ while running:
 
     # actualiser toutes les images qui sont sur le jeu
     fenetre.blit(fond, (0, 0))
+    fenetre.blit(panierSecond.image, panier.rect)
     oeufs.draw(fenetre)
     fenetre.blit(panier.image, panier.rect)
     fenetre.blit(sol, (0, 0))
@@ -57,7 +66,10 @@ while running:
     fenetre.blit(solRound, (0, 0))
 
     # on place la bar de chocolat
-    fenetre.blit(bar_chocolat, (largeur_chocolat - (5*panier.positionLife), 665))
+    if panier.points <= (2/100)*panier.maximum_points:
+        fenetre.blit(bar_chocolat_start, (largeur_chocolat - (-5+(5*panier.positionLife)), 666))
+    else:
+        fenetre.blit(bar_chocolat, (largeur_chocolat - (-5+(5*panier.positionLife)), 666))
 
     # recupere tout les oeufs depuis mon groupe de sprite
     for oeuf in oeufs:
@@ -69,8 +81,8 @@ while running:
     elif touches_active.get(pygame.K_LEFT): # si la touche gauche est active
         panier.deplacement_gauche()
 
-    # mettre à jour l'ecran du jeu
-    pygame.display.flip()
+    
+    
 
     # boucler sur les evenements actif du joueur
     for evenement in pygame.event.get():
@@ -83,3 +95,7 @@ while running:
             touches_active[evenement.key] = True # la touche est active
         elif evenement.type == pygame.KEYUP:
             touches_active[evenement.key] = False # la touche est desactive
+
+    # mettre à jour l'ecran du jeu
+    clock.tick(400)
+    pygame.display.flip()

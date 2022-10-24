@@ -1,5 +1,7 @@
 import random # pour faire des choses au hasard
-import pygame # recuperer les composants
+import pygame
+
+from panierSecond import PanierSecond # recuperer les composants
 
 
 # créer une classe qui va representer l'oeuf en chocolat
@@ -31,7 +33,7 @@ class OeufChocolat(pygame.sprite.Sprite):
         self.rect.y += self.vitesse_chute
 
         # si il touche le panier
-        if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 550:
+        if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 410:
             print("Collision", self.rect.y)
             self.repositionner()
             # ajouter des points
