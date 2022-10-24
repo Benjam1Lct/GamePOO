@@ -17,12 +17,13 @@ running = True
 
 fond = pygame.image.load('assets/fond.jpg') # charger l'image de l'arrière plan
 sol = pygame.image.load('assets/sol.png') # charger l'image du sol
+solRound = pygame.image.load('assets/solRound.png') # charger l'image du sol
 
 # charger la barre de chocolat
 bar_chocolat = pygame.image.load('assets/chocolate.png') 
 
 # redimentionner
-bar_chocolat = pygame.transform.scale(bar_chocolat, (60, 60))
+bar_chocolat = pygame.transform.scale(bar_chocolat, (50, 50))
 
 # créer un dictionnaire qui va contenir en temps reel les touches enclenchées par le joueur
 touches_active = {}
@@ -47,14 +48,16 @@ while running:
     fenetre.blit(panier.image, panier.rect)
     fenetre.blit(sol, (0, 0))
     
-    largeur_chocolat = (panier.points*780)/panier.maximum_points
+    largeur_chocolat = (panier.points*1170)/panier.maximum_points
 
     # dessiner l'arriere de la jauge
     pygame.draw.rect(fenetre, (10, 15, 10), [10, hauteur - 45, largeur - 20, 32] )
     pygame.draw.rect(fenetre, chocolat_couleur, [10, hauteur - 45, largeur_chocolat, 32] )
 
+    fenetre.blit(solRound, (0, 0))
+
     # on place la bar de chocolat
-    fenetre.blit(bar_chocolat, (largeur_chocolat - bar_chocolat.get_width() / 2.9, 660))
+    fenetre.blit(bar_chocolat, (largeur_chocolat - (5*panier.positionLife), 665))
 
     # recupere tout les oeufs depuis mon groupe de sprite
     for oeuf in oeufs:

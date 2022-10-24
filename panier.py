@@ -10,6 +10,10 @@ class Panier(pygame.sprite.Sprite):
         self.largeur_ecran = largeur_ecran
         self.points = 10 # nombre de points qu'aura le joueur
         self.maximum_points = 100 # nombre maximum de points
+        if self.points == 0:
+            self.positionLife = 0
+        else:
+            self.positionLife = 1 + ((self.points*3.5)/self.maximum_points) #position du logo de vie sur la jauge
         self.image = pygame.image.load('assets/panier.png') # charger l'image du panier
         self.image = pygame.transform.scale(self.image, (120, 120)) # redimentionner l'image
         self.rect = self.image.get_rect() # on lui definit un rectangle
@@ -22,7 +26,9 @@ class Panier(pygame.sprite.Sprite):
         if self.points < self.maximum_points: # limite de points
             print("+5 points")
             self.points += 5
+            self.positionLife += (5*(3.5/self.maximum_points))
             print(self.points)
+            print(self.positionLife)
         if self.points > self.maximum_points:
             #gagne
             print('Gagner')
@@ -32,7 +38,9 @@ class Panier(pygame.sprite.Sprite):
         if self.points > 0: 
             print("-5 points")
             self.points -= 5
+            self.positionLife -= (5*(3.5/self.maximum_points))
             print(self.points)
+            print(self.positionLife)
         else:
             # perdu
             print("Perdu")
