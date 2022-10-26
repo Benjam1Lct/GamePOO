@@ -17,23 +17,23 @@ class OeufChocolat(pygame.sprite.Sprite):
         self.largeur_ecran = largeur_ecran
         self.hauteur_ecran = hauteur_ecran
         self.image = pygame.image.load('assets/oeuf.png')
-        self.image = pygame.transform.scale(self.image, (40, 40))
+        self.image = pygame.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(20, largeur_ecran - 40)
 
     # teleporter respawn
     def repositionner(self):
         # reteleporter l'oeuf en haut
-        self.rect.x = random.randint(20, self.largeur_ecran - 40)
+        self.rect.x = random.randint(40, self.largeur_ecran - 30)
         self.rect.y = - self.image.get_height()
-        self.vitesse_chute = random.randint(1, 3)
+        self.vitesse_chute = random.randint(1, 5)
 
     # une methode pour deplacer vers le bas l'oeuf, chuter
     def gravite(self):
-        self.rect.y += self.vitesse_chute
+        self.rect.y += (self.vitesse_chute*2)
 
         # si il touche le panier
-        if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 410:
+        if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 500:
             print("Collision", self.rect.y)
             self.repositionner()
             # ajouter des points

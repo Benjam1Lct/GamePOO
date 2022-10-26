@@ -1,6 +1,5 @@
 import pygame # importe les composants
 
-
 # créer une classe qui va representer le concept de joueur ou du panier sur notre jeu
 class Panier(pygame.sprite.Sprite):
 
@@ -14,12 +13,13 @@ class Panier(pygame.sprite.Sprite):
             self.positionLife = 0
         else:
             self.positionLife = 1 + ((self.points*4.8)/self.maximum_points) #position du logo de vie sur la jauge
-        self.image = pygame.image.load('assets/panierdevant.png') # charger l'image du panier
-        self.image = pygame.transform.scale(self.image, (100, 100)) # redimentionner l'image
+        self.image = pygame.image.load('assets/SacDerriere.png') # charger l'image du panier
+        self.image = pygame.transform.scale(self.image, (250, 250)) # redimentionner l'image
         self.rect = self.image.get_rect() # on lui definit un rectangle
         self.rect.x = (largeur_ecran / 2) - self.image.get_width() /2
-        self.rect.y = hauteur_ecran - 200
-        self.vitesse = 10 # vitesse de deplacement du panier
+        self.rect.y = hauteur_ecran - 335
+        self.vitesse = 12 # vitesse de deplacement du panier
+
 
     # methode pour ajouter 5 points
     def ajouter_points(self):
@@ -50,10 +50,10 @@ class Panier(pygame.sprite.Sprite):
 
     # methode pour le deplacement droite
     def deplacement_droite(self):
-        if self.rect.x < 1100: 
+        if self.rect.x < 1000: 
             self.rect.x += self.vitesse
 
     # methode pour le deplacement gauche
     def deplacement_gauche(self):
-        if self.rect.x > 0:
+        if self.rect.x > -50:
             self.rect.x -= self.vitesse
