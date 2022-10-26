@@ -24,7 +24,7 @@ class Game(pygame.sprite.Sprite):
 
         # créer le panier du joueur
         self.panier = Panier(largeur, hauteur)
-        self.panierSecond = PanierSecond(largeur, hauteur, 'assets/SacDevant.png')
+        self.panierSecond = PanierSecond(largeur, hauteur, 'assets/SacDerriere.png')
         self.spriteDevant = PanierSecond(largeur, hauteur, 'assets/SpriteDevant.png')
         self.spriteDerriere = PanierSecond(largeur, hauteur, 'assets/SpriteDerriere.png')
 
@@ -38,13 +38,17 @@ class Game(pygame.sprite.Sprite):
         self.oeufs.add(OeufChocolat(largeur, hauteur, self.panier))
         self.oeufs.add(OeufChocolat(largeur, hauteur, self.panier))
 
+    def end_game(self):
+        self.is_playing = False
+        self.panier.points = self.panier.maximum_points/2
+
     def update(self, fenetre):
         # actualiser toutes les images qui sont sur le jeu
         fenetre.blit(self.fond, (0, 0))
         fenetre.blit(self.spriteDerriere.image, self.panier.rect)
-        fenetre.blit(self.panier.image, self.panier.rect)
-        self.oeufs.draw(fenetre)
         fenetre.blit(self.panierSecond.image, self.panier.rect)
+        self.oeufs.draw(fenetre)
+        fenetre.blit(self.panier.image, self.panier.rect)
         fenetre.blit(self.spriteDevant.image, self.panier.rect)
         fenetre.blit(self.sol, (0, 0))
         

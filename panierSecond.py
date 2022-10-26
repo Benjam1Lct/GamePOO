@@ -1,5 +1,4 @@
 import pygame # importe les composants
-from panier import Panier
 
 # créer une classe qui va representer le concept de joueur ou du panier sur notre jeu
 class PanierSecond(pygame.sprite.Sprite):

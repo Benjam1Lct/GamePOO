@@ -1,9 +1,6 @@
 import random # pour faire des choses au hasard
 import pygame
 
-from panierSecond import PanierSecond # recuperer les composants
-
-
 # créer une classe qui va representer l'oeuf en chocolat
 class OeufChocolat(pygame.sprite.Sprite):
 
