@@ -41,8 +41,7 @@ class Game(pygame.sprite.Sprite):
         self.score = pygame.transform.scale(self.score, (200, 90))
 
         # on ecrit le score a l'ecran
-        self.scoreNum = math.floor(self.panier.points)
-        self.text_score = self.police.render(str(self.scoreNum), 1 ,(255,255,255))  # type: ignore
+          # type: ignore
 
         # créer un groupe qui va contenir plusieurs oeufs en chocolat
         self.oeufs = pygame.sprite.Group()
@@ -75,9 +74,13 @@ class Game(pygame.sprite.Sprite):
         fenetre.blit(self.solRound, (0, 0))
         # afficher icon sur la jauge de progression
         fenetre.blit(self.bar_chocolat, (largeur_chocolat + 35, 666))
+
+        scoreNum = math.floor(self.panier.points)
+        text_score = self.police.render(str(scoreNum), 1 ,(255,255,255))
+
         # afficher le score en haut de l'ecran qui correspond au nombre de points
         fenetre.blit(self.score, (1003, 0))
-        fenetre.blit(self.text_score, (1085,45))
+        fenetre.blit(text_score, (1085,45))
 
         # recupere tout les oeufs depuis mon groupe de sprite
         for oeuf in self.oeufs:
