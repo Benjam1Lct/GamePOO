@@ -42,7 +42,7 @@ class Game(pygame.sprite.Sprite):
 
         # on ecrit le score a l'ecran
         self.scoreNum = math.floor(self.panier.points)
-        self.text_score = self.police.render(str(self.scoreNum), 1 ,(255,255,255))
+        self.text_score = self.police.render(str(self.scoreNum), 1 ,(255,255,255))  # type: ignore
 
         # créer un groupe qui va contenir plusieurs oeufs en chocolat
         self.oeufs = pygame.sprite.Group()
@@ -81,7 +81,7 @@ class Game(pygame.sprite.Sprite):
 
         # recupere tout les oeufs depuis mon groupe de sprite
         for oeuf in self.oeufs:
-            oeuf.gravite()
+            oeuf.gravite()  # type: ignore
 
         # detecter quelle est la touche active par le joueur
         if self.touches_active.get(pygame.K_RIGHT): # si la touche droite est active
