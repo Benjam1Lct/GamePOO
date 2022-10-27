@@ -3,7 +3,6 @@ from settings import Settings_Menu # on import la classe oeuf chocolat
 from start import Start_Menu
 import pygame
 pygame.init() # charger les composants
-
 # definir les dimentions
 largeur = 1200
 hauteur = 720
@@ -27,9 +26,13 @@ running = True
 # tant que la fenetre est active, on boucle des instructions à chaque fois
 while running:
 
+    # partie gagner
     if game.panier.points >= game.panier.maximum_points:
         game.end_game()
         start.end_game()
+    # partie perdue
+    elif game.panier.points <= 0:
+        pass
     elif game.is_playing:
         game.update(fenetre)
     elif start.is_playing:

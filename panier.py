@@ -7,7 +7,7 @@ class Panier(pygame.sprite.Sprite):
     def __init__(self, largeur_ecran, hauteur_ecran):
         super().__init__()
         self.largeur_ecran = largeur_ecran
-        self.maximum_points = 10 # nombre maximum de points
+        self.maximum_points = 100 # nombre maximum de points
         self.points = self.maximum_points/2 # nombre de points qu'aura le joueur
         if self.points == 0:
             self.positionLife = 0
@@ -36,7 +36,7 @@ class Panier(pygame.sprite.Sprite):
 
     # methode enlever 2 points
     def enlever_points(self):
-        if self.points > 0: 
+        if self.points >= 5: 
             print("-5 points")
             self.points -= 5
             self.positionLife -= (5*(4.8/self.maximum_points))
