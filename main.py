@@ -56,17 +56,20 @@ while running:
             game.touches_active[evenement.key] = False # la touche est desactive
         # verification si la souris est en collision avec le bouton 'Jouer'
         elif evenement.type == pygame.MOUSEBUTTONDOWN:
+            # mettre le jeu en mode "is_playing" = True pour commencer la partie
             if start.buttonPlayRect.collidepoint(evenement.pos) and start.is_playing:
-                # mettre le jeu en mode "is_playing" = True
                 start.is_playing = False
                 game.start()
+            # sinon acceder au parametre si le bouton est clique
             elif start.buttonSettingsRect.collidepoint(evenement.pos) and start.is_playing:
                 start.is_playing = False
                 game.settings.is_playing = True
+            # sinon revenir a l'ecran titre si le bouton pour fermer les options est clique
             elif game.settings.buttonCloseRect.collidepoint(evenement.pos) and game.settings.is_playing:
                 game.settings.is_playing = False
                 start.is_playing = True
                 start.refresh()
+            # sinon dans les options si le mode easy est clique passer les option de difficulter sur 0 et mettre a jour les variable de points et de vitesse
             elif game.settings.button_easy_unselect_rect.collidepoint(evenement.pos) and game.settings.is_playing == True:
                 game.panier.level_setting = 0
                 game.settings.update(fenetre)
@@ -74,6 +77,7 @@ while running:
                 print(game.panier.level_setting)
                 print(game.panier.maximum_points)
                 print(game.panier.points)
+            # sinon dans les options si le mode normal est clique passer les option de difficulter sur 1 et mettre a jour les variable de points et de vitesse
             elif game.settings.button_normal_unselect_rect.collidepoint(evenement.pos) and game.settings.is_playing == True:
                 game.panier.level_setting = 1
                 game.settings.update(fenetre)
@@ -81,6 +85,7 @@ while running:
                 print(game.panier.level_setting)
                 print(game.panier.maximum_points)
                 print(game.panier.points)
+            # sinon dans les options si le mode hard est clique passer les option de difficulter sur 2 et mettre a jour les variable de points et de vitesse
             elif game.settings.button_hard_unselect_rect.collidepoint(evenement.pos) and game.settings.is_playing == True:
                 game.panier.level_setting = 2
                 game.settings.update(fenetre)
@@ -88,6 +93,7 @@ while running:
                 print(game.panier.level_setting)
                 print(game.panier.maximum_points)
                 print(game.panier.points)
+            # lors d'un partie si le bouton 'back' est clique revenir a l'ecran titre est tout remettre a zero
             elif game.back_rect.collidepoint(evenement.pos) and game.is_playing:
                 game.end_game()
                 start.end_game()
@@ -95,5 +101,5 @@ while running:
                 
 
     # mettre à jour l'ecran du jeu
-    clock.tick(400)
+    clock.tick(60)
     pygame.display.flip()
