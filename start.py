@@ -40,14 +40,14 @@ class Start_Menu(pygame.sprite.Sprite):
         self.buttonPicRect.y = self.hauteur/9
         
         #on le boutton 'jouer'
-        self.buttonPlay = pygame.image.load('assets/button_start.png')
+        self.buttonPlay = pygame.image.load('assets/button/button_start.png')
         self.buttonPlay = pygame.transform.scale(self.buttonPlay, (273, 110))
         self.buttonPlayRect = self.buttonPlay.get_rect() # on lui definit un rectangle
         self.buttonPlayRect.x = (self.largeur / 5.12) - self.buttonPlay.get_width() /3
         self.buttonPlayRect.y = self.hauteur/2.15
         
         #on le boutton 'settings'
-        self.buttonSettings = pygame.image.load('assets/button_settings.png')
+        self.buttonSettings = pygame.image.load('assets/button/button_settings.png')
         self.buttonSettings = pygame.transform.scale(self.buttonSettings, (273, 110))
         self.buttonSettingsRect = self.buttonSettings.get_rect() # on lui definit un rectangle
         self.buttonSettingsRect.x = (self.largeur / 7.12) - self.buttonSettings.get_width() /3

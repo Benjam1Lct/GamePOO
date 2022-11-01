@@ -3,7 +3,7 @@ import pygame
 from panier import Panier
 
 # créer une classe qui va representer l'oeuf en chocolat
-class OeufChocolat(pygame.sprite.Sprite):
+class Feuille(pygame.sprite.Sprite):
 
     # definir la fonction init qui charge les caracteristiques de base de notre oeuf
     def __init__(self, largeur_ecran, hauteur_ecran, panier):
@@ -14,7 +14,7 @@ class OeufChocolat(pygame.sprite.Sprite):
         self.panier_group.add(self.panier)
         self.largeur_ecran = largeur_ecran
         self.hauteur_ecran = hauteur_ecran
-        self.image = pygame.image.load('assets/oeuf.png')
+        self.image = pygame.image.load('assets/feuille.png')
         self.image = pygame.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(20, largeur_ecran - 40)

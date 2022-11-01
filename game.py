@@ -2,7 +2,7 @@ import math
 import pygame # importe les composants
 from panier import Panier
 from panierSecond import PanierSecond
-from oeuf import OeufChocolat
+from feuille import Feuille
 from settings import Settings_Menu
 
 class Game(pygame.sprite.Sprite):
@@ -16,17 +16,17 @@ class Game(pygame.sprite.Sprite):
         self.solRound = pygame.image.load('assets/solRound.png') # charger l'image du sol
 
         # charger la lampe
-        self.bar_chocolat = pygame.image.load('assets/chocolate.png')
+        self.lanterne = pygame.image.load('assets/lanterne.png')
         
         # charger le bouton retour a l'ecran titre
-        self.back = pygame.image.load('assets/button_back.png')
+        self.back = pygame.image.load('assets/button/button_back.png')
         self.back = pygame.transform.scale(self.back, (112, 54.58))
         self.back_rect = self.back.get_rect()
         self.back_rect.x = 0
         self.back_rect.y = 0
 
         # redimentionner
-        self.bar_chocolat = pygame.transform.scale(self.bar_chocolat, (36, 50))
+        self.lanterne = pygame.transform.scale(self.lanterne, (36, 50))
 
         # créer un dictionnaire qui va contenir en temps reel les touches enclenchées par le joueur
         self.touches_active = {}
@@ -85,17 +85,17 @@ class Game(pygame.sprite.Sprite):
         fenetre.blit(self.spriteDevant.image, self.panier.rect)
         fenetre.blit(self.sol, (0, 0))
         
-        largeur_chocolat = (self.panier.points*(self.largeur-112))/self.panier.maximum_points
+        largeur_lanterne = (self.panier.points*(self.largeur-112))/self.panier.maximum_points
 
         # dessiner l'arriere de la jauge
         pygame.draw.rect(fenetre, (0, 0, 0), [57, self.hauteur - 50, self.largeur - 112, 36] ) # dimension dans la fenetre
 
-        pygame.draw.rect(fenetre, self.chocolat_couleur, [57, self.hauteur - 50, largeur_chocolat, 36] )
+        pygame.draw.rect(fenetre, self.chocolat_couleur, [57, self.hauteur - 50, largeur_lanterne, 36] )
 
         # afficher le designer de la jauge de progression
         fenetre.blit(self.solRound, (0, 0))
         # afficher icon sur la jauge de progression
-        fenetre.blit(self.bar_chocolat, (largeur_chocolat + 35, 666))
+        fenetre.blit(self.lanterne, (largeur_lanterne + 35, 666))
 
         
 
