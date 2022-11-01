@@ -28,11 +28,14 @@ while running:
 
     # partie gagner
     if game.panier.points >= game.panier.maximum_points:
+        start.end_game_statut = 1
         game.end_game()
         start.end_game()
     # partie perdue
     elif game.panier.points <= 0:
-        pass
+        start.end_game_statut = 2
+        game.end_game()
+        start.end_game()
     elif game.is_playing:
         game.update(fenetre)
     elif start.is_playing:
@@ -64,6 +67,7 @@ while running:
             elif settings.buttonCloseRect.collidepoint(evenement.pos):
                 settings.is_playing = True
                 start.is_playing = True
+                start.refresh()
 
 
     # mettre à jour l'ecran du jeu
