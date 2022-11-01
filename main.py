@@ -1,5 +1,4 @@
 from game import Game
-from settings import Settings_Menu # on import la classe oeuf chocolat
 from start import Start_Menu
 import pygame
 pygame.init() # charger les composants
