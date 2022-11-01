@@ -52,18 +52,18 @@ class Game(pygame.sprite.Sprite):
           # type: ignore
 
         # créer un groupe qui va contenir plusieurs oeufs en chocolat
-        self.oeufs = pygame.sprite.Group()
+        self.feuille = pygame.sprite.Group()
     
     def start(self):
         self.is_playing = True
-        self.oeufs.add(OeufChocolat(self.largeur, self.hauteur, self.panier))
-        self.oeufs.add(OeufChocolat(self.largeur, self.hauteur, self.panier))
-        self.oeufs.add(OeufChocolat(self.largeur, self.hauteur, self.panier))
+        self.feuille.add(Feuille(self.largeur, self.hauteur, self.panier))
+        self.feuille.add(Feuille(self.largeur, self.hauteur, self.panier))
+        self.feuille.add(Feuille(self.largeur, self.hauteur, self.panier))
 
     def end_game(self):
         self.is_playing = False
         self.panier.points = self.panier.maximum_points/2
-        self.oeufs = pygame.sprite.Group()
+        self.feuille = pygame.sprite.Group()
 
     def update(self, fenetre):
         # actualiser toutes les images qui sont sur le jeu
@@ -80,7 +80,7 @@ class Game(pygame.sprite.Sprite):
 
         fenetre.blit(self.spriteDerriere.image, self.panier.rect)
         fenetre.blit(self.panierSecond.image, self.panier.rect)
-        self.oeufs.draw(fenetre)
+        self.feuille.draw(fenetre)
         fenetre.blit(self.panier.image, self.panier.rect)
         fenetre.blit(self.spriteDevant.image, self.panier.rect)
         fenetre.blit(self.sol, (0, 0))
@@ -100,8 +100,8 @@ class Game(pygame.sprite.Sprite):
         
 
         # recupere tout les oeufs depuis mon groupe de sprite
-        for oeuf in self.oeufs:
-            oeuf.gravite()  # type: ignore
+        for petales in self.feuille:
+            petales.gravite()  # type: ignore
 
         # detecter quelle est la touche active par le joueur
         if self.touches_active.get(pygame.K_RIGHT): # si la touche droite est active

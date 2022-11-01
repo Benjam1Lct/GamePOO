@@ -12,7 +12,7 @@ clock = pygame.time.Clock()
 # creer la fenetre avec pygame
 fenetre = pygame.display.set_mode((largeur, hauteur)) # on definit la taille
 pygame.display.set_caption("Drop & Collect") # on definit un titre
-pygame.display.set_icon(pygame.image.load('assets/oeuf.png'))
+pygame.display.set_icon(pygame.image.load('assets/feuille.png'))
 
 #on charge
 game = Game(largeur, hauteur)
