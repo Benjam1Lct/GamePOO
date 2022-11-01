@@ -1,5 +1,6 @@
 import random # pour faire des choses au hasard
 import pygame
+from panier import Panier
 
 # créer une classe qui va representer l'oeuf en chocolat
 class OeufChocolat(pygame.sprite.Sprite):
@@ -18,16 +19,25 @@ class OeufChocolat(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(20, largeur_ecran - 40)
 
+    def restart(self):
+        self.rect.y = 0
+
     # teleporter respawn
     def repositionner(self):
         # reteleporter l'oeuf en haut
         self.rect.x = random.randint(40, self.largeur_ecran - 30)
         self.rect.y = - self.image.get_height()
-        self.vitesse_chute = random.randint(1, 5)
+        self.vitesse_chute = random.randint(2, 5)
 
     # une methode pour deplacer vers le bas l'oeuf, chuter
     def gravite(self):
-        self.rect.y += (self.vitesse_chute*2)
+        if self.panier.level_setting == 0:
+            self.rect.y += (self.vitesse_chute*1.5)
+        elif self.panier.level_setting == 1:
+            self.rect.y += (self.vitesse_chute*2)
+        elif self.panier.level_setting == 2:
+            self.rect.y += (self.vitesse_chute*3)
+
 
         # si il touche le panier
         if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 500:
@@ -38,7 +48,7 @@ class OeufChocolat(pygame.sprite.Sprite):
 
 
         # si il sort de l'ecran
-        if self.rect.y >= self.hauteur_ecran:
+        if self.rect.y >= 646:
             self.repositionner()
             # enlever les points
             self.panier.enlever_points()

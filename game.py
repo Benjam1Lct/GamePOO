@@ -3,6 +3,7 @@ import pygame # importe les composants
 from panier import Panier
 from panierSecond import PanierSecond
 from oeuf import OeufChocolat
+from settings import Settings_Menu
 
 class Game(pygame.sprite.Sprite):
 
@@ -10,7 +11,6 @@ class Game(pygame.sprite.Sprite):
         self.is_playing = False
         self.largeur = largeur
         self.hauteur = hauteur
-        self.police = pygame.font.SysFont('fonts/PressStart2P-Regular.ttf', 40)
         self.fond = pygame.image.load('assets/fond.jpg') # charger l'image de l'arrière plan
         self.sol = pygame.image.load('assets/sol.png') # charger l'image du sol
         self.solRound = pygame.image.load('assets/solRound.png') # charger l'image du sol
@@ -18,7 +18,12 @@ class Game(pygame.sprite.Sprite):
         # charger la lampe
         self.bar_chocolat = pygame.image.load('assets/chocolate.png')
         
-        
+        # charger le bouton retour a l'ecran titre
+        self.back = pygame.image.load('assets/button_back.png')
+        self.back = pygame.transform.scale(self.back, (112, 54.58))
+        self.back_rect = self.back.get_rect()
+        self.back_rect.x = 0
+        self.back_rect.y = 0
 
         # redimentionner
         self.bar_chocolat = pygame.transform.scale(self.bar_chocolat, (36, 50))
@@ -31,6 +36,9 @@ class Game(pygame.sprite.Sprite):
         self.panierSecond = PanierSecond(largeur, hauteur, 'assets/SacDerriere.png')
         self.spriteDevant = PanierSecond(largeur, hauteur, 'assets/SpriteDevant.png')
         self.spriteDerriere = PanierSecond(largeur, hauteur, 'assets/SpriteDerriere.png')
+
+        # on creer les settings
+        self.settings = Settings_Menu(largeur, hauteur, self.panier)
 
 
         # créer la couleur
@@ -45,17 +53,31 @@ class Game(pygame.sprite.Sprite):
 
         # créer un groupe qui va contenir plusieurs oeufs en chocolat
         self.oeufs = pygame.sprite.Group()
-        self.oeufs.add(OeufChocolat(largeur, hauteur, self.panier))
-        self.oeufs.add(OeufChocolat(largeur, hauteur, self.panier))
-        self.oeufs.add(OeufChocolat(largeur, hauteur, self.panier))
+    
+    def start(self):
+        self.is_playing = True
+        self.oeufs.add(OeufChocolat(self.largeur, self.hauteur, self.panier))
+        self.oeufs.add(OeufChocolat(self.largeur, self.hauteur, self.panier))
+        self.oeufs.add(OeufChocolat(self.largeur, self.hauteur, self.panier))
 
     def end_game(self):
         self.is_playing = False
         self.panier.points = self.panier.maximum_points/2
+        self.oeufs = pygame.sprite.Group()
 
     def update(self, fenetre):
         # actualiser toutes les images qui sont sur le jeu
         fenetre.blit(self.fond, (0, 0))
+        fenetre.blit(self.back, self.back_rect)
+
+        police = pygame.font.Font('fonts/PressStart2P-Regular.ttf', 26)
+        scoreNum = math.floor(self.panier.points)
+        text_score = police.render(str(scoreNum), True ,(255,255,255))
+
+        # afficher le score en haut de l'ecran qui correspond au nombre de points
+        fenetre.blit(self.score, (1003, 0))
+        fenetre.blit(text_score, (1070,45))
+
         fenetre.blit(self.spriteDerriere.image, self.panier.rect)
         fenetre.blit(self.panierSecond.image, self.panier.rect)
         self.oeufs.draw(fenetre)
@@ -75,12 +97,7 @@ class Game(pygame.sprite.Sprite):
         # afficher icon sur la jauge de progression
         fenetre.blit(self.bar_chocolat, (largeur_chocolat + 35, 666))
 
-        scoreNum = math.floor(self.panier.points)
-        text_score = self.police.render(str(scoreNum), 1 ,(255,255,255))
-
-        # afficher le score en haut de l'ecran qui correspond au nombre de points
-        fenetre.blit(self.score, (1003, 0))
-        fenetre.blit(text_score, (1085,45))
+        
 
         # recupere tout les oeufs depuis mon groupe de sprite
         for oeuf in self.oeufs:

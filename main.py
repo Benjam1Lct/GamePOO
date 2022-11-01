@@ -18,7 +18,7 @@ pygame.display.set_icon(pygame.image.load('assets/oeuf.png'))
 #on charge
 game = Game(largeur, hauteur)
 start = Start_Menu(largeur, hauteur)
-settings = Settings_Menu(largeur, hauteur)
+
 
 # maintenir la fenetre du jeu en eveil pour pas qu'elle se ferme
 running = True
@@ -40,8 +40,8 @@ while running:
         game.update(fenetre)
     elif start.is_playing:
         start.update(fenetre)
-    elif settings.is_playing:
-        settings.update(fenetre)
+    elif game.settings.is_playing:
+        game.settings.update(fenetre)
     
 
     # boucler sur les evenements actif du joueur
@@ -57,18 +57,43 @@ while running:
             game.touches_active[evenement.key] = False # la touche est desactive
         # verification si la souris est en collision avec le bouton 'Jouer'
         elif evenement.type == pygame.MOUSEBUTTONDOWN:
-            if start.buttonPlayRect.collidepoint(evenement.pos):
+            if start.buttonPlayRect.collidepoint(evenement.pos) and start.is_playing:
                 # mettre le jeu en mode "is_playing" = True
                 start.is_playing = False
-                game.is_playing = True
-            elif start.buttonSettingsRect.collidepoint(evenement.pos):
+                game.start()
+            elif start.buttonSettingsRect.collidepoint(evenement.pos) and start.is_playing:
                 start.is_playing = False
-                settings.is_playing = True
-            elif settings.buttonCloseRect.collidepoint(evenement.pos):
-                settings.is_playing = True
+                game.settings.is_playing = True
+            elif game.settings.buttonCloseRect.collidepoint(evenement.pos) and game.settings.is_playing:
+                game.settings.is_playing = False
                 start.is_playing = True
                 start.refresh()
-
+            elif game.settings.button_easy_unselect_rect.collidepoint(evenement.pos) and game.settings.is_playing == True:
+                game.panier.level_setting = 0
+                game.settings.update(fenetre)
+                game.panier.update_level()
+                print(game.panier.level_setting)
+                print(game.panier.maximum_points)
+                print(game.panier.points)
+            elif game.settings.button_normal_unselect_rect.collidepoint(evenement.pos) and game.settings.is_playing == True:
+                game.panier.level_setting = 1
+                game.settings.update(fenetre)
+                game.panier.update_level()
+                print(game.panier.level_setting)
+                print(game.panier.maximum_points)
+                print(game.panier.points)
+            elif game.settings.button_hard_unselect_rect.collidepoint(evenement.pos) and game.settings.is_playing == True:
+                game.panier.level_setting = 2
+                game.settings.update(fenetre)
+                game.panier.update_level()
+                print(game.panier.level_setting)
+                print(game.panier.maximum_points)
+                print(game.panier.points)
+            elif game.back_rect.collidepoint(evenement.pos) and game.is_playing:
+                game.end_game()
+                start.end_game()
+                
+                
 
     # mettre à jour l'ecran du jeu
     clock.tick(400)
