@@ -1,3 +1,7 @@
+# Projet Drop $ Collect
+# Axel GERARD-VANNIER TG8
+# Benjamin LECOMTE TG8
+
 from game import Game
 from start import Start_Menu
 import pygame
