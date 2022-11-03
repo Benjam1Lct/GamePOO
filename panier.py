@@ -17,7 +17,7 @@ class Panier(pygame.sprite.Sprite):
         self.hauteur_ecran = hauteur_ecran
 
         # nombre maximum de points, par defaut a 100
-        self.maximum_points = 100
+        self.maximum_points = 50
 
         # nombre de points qu'aura le joueur correspond a la moitie des points max
         self.points = self.maximum_points/2
