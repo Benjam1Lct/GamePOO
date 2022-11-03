@@ -10,7 +10,7 @@ class Panier(pygame.sprite.Sprite):
         # level 0 = easy
         # level 1 = normal
         # level 2 = hard
-        self.level_setting = 1
+        self.level_setting = 0
 
         # on defini la taille de la fenetre 
         self.largeur_ecran = largeur_ecran
