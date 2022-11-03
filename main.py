@@ -1,12 +1,14 @@
 from game import Game
 from start import Start_Menu
 import pygame
-pygame.init() # charger les composants
-# definir les dimentions
+# charger les composants
+pygame.init()
+
+# definir les dimentions de la fenetre du jeu
 largeur = 1200
 hauteur = 720
 
-#def des fps
+# on initialise les fps du jeu
 clock = pygame.time.Clock()
 
 # creer la fenetre avec pygame
@@ -18,27 +20,30 @@ pygame.display.set_icon(pygame.image.load('assets/feuille.png'))
 game = Game(largeur, hauteur)
 start = Start_Menu(largeur, hauteur)
 
-
 # maintenir la fenetre du jeu en eveil pour pas qu'elle se ferme
 running = True
 
 # tant que la fenetre est active, on boucle des instructions à chaque fois
 while running:
 
-    # partie gagner
+    # on creer des conditions qui permettent de savoir quelle page afficher
+    # si la partie est gagner
     if game.panier.points >= game.panier.maximum_points:
         start.end_game_statut = 1
         game.end_game()
         start.end_game()
-    # partie perdue
+    # sinon si la partie est perdue
     elif game.panier.points <= 0:
         start.end_game_statut = 2
         game.end_game()
         start.end_game()
+    # sinon si la partie est en cours
     elif game.is_playing:
         game.update(fenetre)
+    # sinon si l'ecran d'acceuil est en cours
     elif start.is_playing:
         start.update(fenetre)
+    # sinon si l'ecran des options est en cours
     elif game.settings.is_playing:
         game.settings.update(fenetre)
     
@@ -94,12 +99,11 @@ while running:
                 print(game.panier.maximum_points)
                 print(game.panier.points)
             # lors d'un partie si le bouton 'back' est clique revenir a l'ecran titre est tout remettre a zero
-            elif game.back_rect.collidepoint(evenement.pos) and game.is_playing:
+            elif game.back_rect.collidepoint(evenement.pos) and game.is_playing == True:
                 game.end_game()
                 start.end_game()
-                
-                
-
-    # mettre à jour l'ecran du jeu
+ 
+    # on definit les fps du jeu
     clock.tick(60)
+    # on met à jour l'ecran du jeu
     pygame.display.flip()

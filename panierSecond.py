@@ -6,19 +6,20 @@ class PanierSecond(pygame.sprite.Sprite):
     # le constructeur
     def __init__(self, largeur_ecran, hauteur_ecran, image):
         super().__init__()
+
+        # on definie la taille de l'ecran
         self.largeur_ecran = largeur_ecran
-        self.maximum_points = 200 # nombre maximum de points
-        self.points = self.maximum_points/2 # nombre de points qu'aura le joueur
-        if self.points == 0:
-            self.positionLife = 0
-        else:
-            self.positionLife = 1 + ((self.points*4.8)/self.maximum_points) #position du logo de vie sur la jauge
+        
+        # on initialise l'image de l'objet en fonction du parametre
         self.image = pygame.image.load(image) # charger l'image du panier
         self.image = pygame.transform.scale(self.image, (250, 250)) # redimentionner l'image
-        self.rect = self.image.get_rect() # on lui definit un rectangle
+        # on lui definit un rectangle afin de le placer facilement
+        self.rect = self.image.get_rect() 
         self.rect.x = (largeur_ecran / 2) - self.image.get_width() /2
         self.rect.y = hauteur_ecran - 335
-        self.vitesse = 12 # vitesse de deplacement du panier
+
+        # vitesse de deplacement du panier
+        self.vitesse = 12 
 
     # methode pour le deplacement droite
     def deplacement_droite(self):
