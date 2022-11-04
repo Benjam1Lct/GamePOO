@@ -2,6 +2,11 @@ import pygame # importe les composants
 
 # créer une classe qui va representer le concept de joueur ou du panier sur notre jeu
 class PanierSecond(pygame.sprite.Sprite):
+    """
+    Objectif: affiche le reste du sprite du joueur qui n'a pour seul but de decoration
+    Args: utilise le module pygame pour afficher les image a l'ecran
+    Return: affiche les image sur la fenetre du jeu, elle sont deplacer en meme temps que le sprite principale du joueur
+    """
 
     # le constructeur
     def __init__(self, largeur_ecran, hauteur_ecran, image):

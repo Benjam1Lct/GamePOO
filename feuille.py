@@ -3,6 +3,12 @@ import pygame
 
 # créer une classe qui va representer la feuille
 class Feuille(pygame.sprite.Sprite):
+    """
+    Objectif: creer des objet qui tombe du haut de la fenetre, une fois attrape augmente le score
+    Arg: le module pygame afin de creer un groupe avec les feuille
+    Return: creer trois feuille qui tombe et les font respawn en haut de l'ecran une fois qu'elle entre en colision 
+            avec le joueur ou le bord de l'ecran
+    """
 
     # definir la fonction init qui charge les caracteristiques de base de la feuille
     def __init__(self, largeur_ecran, hauteur_ecran, panier):
@@ -48,14 +54,12 @@ class Feuille(pygame.sprite.Sprite):
         elif self.panier.level_setting == 2:
             self.rect.y += (self.vitesse_chute*3.5)
 
-
         # si la feuille rentre en collision avec le panier alors on reposition la feuille avec la methode "repositionner" et on ajoute un point avec la methode dans la classe "Panier"
         if pygame.sprite.spritecollide(self, self.panier_group, False, pygame.sprite.collide_mask) and self.rect.y >= 500:
             print("Collision", self.rect.y)
             self.repositionner()
             # ajouter des points
             self.panier.ajouter_points()
-
 
         # si la position en y de la feuille depasse 646 alors cela signifie que la feuille n'est plus visible donc qu'elle est sortie de l'ecran
         # donc on enlever des points et on repositionne la feuille en haut de la fenetre avec la methode "repositionner"

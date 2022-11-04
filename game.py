@@ -6,6 +6,12 @@ from feuille import Feuille
 from settings import Settings_Menu
 
 class Game(pygame.sprite.Sprite):
+    """
+    Objectif: lorsque le bouton "jouer" est cliquer, permet de creer une page de jeu active
+    Args: le module pygame afin de creer le jeu
+    Return: renvoie une page avec un sprite que l'on peut deplacer sur un arriere plan, affiche egalement un score qui s'actualise
+            et des objet son generer et tombre de l'ecran, l'objectif etant de les attraper afin de gagner des points
+    """
 
     def __init__(self, largeur, hauteur):
         self.is_playing = False # variable qui indique si une partie est en cour
@@ -120,7 +126,8 @@ class Game(pygame.sprite.Sprite):
 
         # on recupere tout les oeufs depuis le groupe de sprite
         for petales in self.feuille:
-            # on utilise la methode de la class Feuille pour deplacer vers le bas les feuilles
+            # on utilise la methode de la class Feuille pour deplacer vers le bas les feuilles et verifier si 
+            # elle entre en colision avec le joueur ou si elle sort de l'ecran pour la faire respawn
             petales.gravite()
 
         # detecter quelle est la touche active par le joueur

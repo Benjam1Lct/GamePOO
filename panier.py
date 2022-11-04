@@ -2,6 +2,11 @@ import pygame # importe les composants
 
 # créer une classe qui va representer le concept de joueur ou du panier sur notre jeu
 class Panier(pygame.sprite.Sprite):
+    """
+    Objectif: permet de creer la partie du sprite du joueur qui s'occupera de l'interaction avec les objet qui tombe et s'occupe de la gestion du score
+    Args: prend en parametre le module pygame afin de creer un objet a l'ecran et de pouvoir interagire ave
+    Return: renvoie le sprite du joueur a l'ecran avec la possibilite de le deplacer de droite a gauche
+    """
 
     # le constructeur
     def __init__(self, largeur_ecran, hauteur_ecran):

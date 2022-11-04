@@ -1,6 +1,11 @@
 import pygame # importe les composants
 
 class Start_Menu(pygame.sprite.Sprite):
+    """
+    Objectif: au demarrage du jeu affiche un ecran d'accueil avec le titre du jeu et des boutons afin de lancer une partie ou de parametrer la difficulte
+    Args: le module pygame
+    Return: renvoie une une fenetre avec des element (arriere plan, bouton) dont l'interaction est possible
+    """
 
     def __init__(self, largeur, hauteur):
         self.end_game_statut = 0 # variable permetant de savoir quel ecran de fin afficher en fonction du resultat

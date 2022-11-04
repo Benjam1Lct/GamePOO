@@ -1,6 +1,11 @@
 import pygame # importe les composants
 
 class Settings_Menu(pygame.sprite.Sprite):
+    """
+    Objectif: lorsque le bouton "options" est clique, permet d'afficher une fenetre avec des bouton de parametrage
+    Args: le module pygame
+    Return: renvoie une page avec des element (arriere plan, titre) et trois bouton cliquable pour choisir une difficulte
+    """
 
     def __init__(self, largeur, hauteur, panier):
         self.is_playing = False # variable qui indique si le menu des options est ouvert ou non
